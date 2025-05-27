@@ -37,7 +37,7 @@
     <div>
         <h1>Category List</h1>
         @foreach ($categories as $data)
-            <p>{{ $data['id'] }} : {{ $data['name'] }} </p>
+            <div>{{ $data['id'] }} : {{ $data['name'] }} </div>
         @endforeach
     </div>
 </body>
