@@ -9,35 +9,11 @@
 </head>
 
 <body>
-    {{-- @php
-        $categories = [
-            [
-                'id' => 1,
-                'name' => 'Information Technology',
-            ],
-            [
-                'id' => 2,
-                'name' => 'Travel',
-            ],
-            [
-                'id' => 3,
-                'name' => 'Food',
-            ],
-            [
-                'id' => 4,
-                'name' => 'Health & Fitness',
-            ],
-            [
-                'id' => 5,
-                'name' => 'Education',
-            ],
-        ];
-    @endphp --}}
-    {{-- {{ dd($categories); }} --}}
     <div>
         <h1>Category List</h1>
         @foreach ($categories as $data)
-            <div>{{ $data['id'] }} : {{ $data['name'] }} </div>
+            <p>{{ $data['id'] }} : {{ $data['name'] }} </p>
+            <a href="{{route('categories.show', ['id' => $data->id])}}">Show</a>
         @endforeach
     </div>
 </body>
