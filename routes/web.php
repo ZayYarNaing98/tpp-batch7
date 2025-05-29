@@ -45,5 +45,13 @@ Route::prefix('/dashboard')->group(function(){
 //     return view('categories.index');
 // });
 
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+// Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
+
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+
+Route::post('/categores/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
