@@ -16,7 +16,6 @@ class CategoryController extends Controller
 
     public function create()
     {
-        // dd('here');
         return view('categories.create');
     }
 
@@ -29,20 +28,8 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
-    // public function show($id)
-    // {
-    //     // dd('here');
-    //     // dd($id);
-    //     $category = Category::find($id);
-
-    //     // dd($category);
-    //     return view('categories.show', compact('category'));
-    // }
-
     public function edit($id)
     {
-        // dd('here');
-        // dd($id);
         $category = Category::find($id);
 
         return view('categories.edit', compact('category'));
@@ -50,9 +37,7 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
-        // dd('here');
         $category = Category::find($request->id);
-        // dd($category);
 
         $category->update([
             'name' => $request->name,
@@ -63,8 +48,6 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        // dd('hree');
-        // dd($id);
         $category = Category::find($id);
 
         $category->delete();
