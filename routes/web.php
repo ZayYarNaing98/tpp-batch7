@@ -45,7 +45,7 @@ Route::prefix('/dashboard')->group(function(){
 //     return view('categories.index');
 // });
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryUpateRequest;
 
 class CategoryController extends Controller
 {
@@ -21,11 +22,12 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        Category::create([
-            'name' => $request->name
+        $data = $request->validate([
+            'name' => 'required|string'
         ]);
+        Category::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 
     public function edit($id)
@@ -35,7 +37,7 @@ class CategoryController extends Controller
         return view('categories.edit', compact('category'));
     }
 
-    public function update(Request $request)
+    public function update(CategoryUpateRequest $request)
     {
         $category = Category::find($request->id);
 
@@ -43,7 +45,7 @@ class CategoryController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 
     public function delete($id)
@@ -52,6 +54,6 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 }
