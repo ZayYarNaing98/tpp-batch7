@@ -27,6 +27,9 @@
                 <div class="card-body">
                     <input type="text" class="form-control" name="name" value="{{ $category->name }}"/>
                 </div>
+                <div class="card-body">
+                    <img src="{{ asset('categoryImages/'. $category->image) }}" alt="{{ $category->image }}"  style="width: 50px; height: 50px;"/>
+                </div>
                 <div class="card-footer">
                     <button class="btn btn-primary me-2" type="submit">
                         Update

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductUpdateRequest;
 
@@ -10,14 +11,17 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
 
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
-        return view('products.create');
+
+        $categories = Category::all();
+
+        return view('products.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -26,6 +30,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|integer',
+            'category_id' => 'required',
         ]);
 
         Product::create($data);

@@ -12,7 +12,6 @@
 
 <body>
     <div class="container">
-        {{-- {{ dd($errors) }} --}}
         <div class="mt-4 text-danger">
             @if ($errors->any())
                 <ul>
@@ -26,10 +25,13 @@
             <div class="card-header">
                 + Create
             </div>
-            <form action="{{ route('categories.store') }}" method="POST">
+            <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <input type="text" class="form-control" placeholder="Enter Category Name" name="name" />
+                </div>
+                <div class="card-body">
+                    <input type="file" class="form-control" name="image"/>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary me-2" type="submit">
