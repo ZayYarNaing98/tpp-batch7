@@ -40,6 +40,16 @@
                     <input type="text" name="price" class="form-control"
                         value="{{ $product->price }}" />
                 </div>
+                <div class="card-body">
+                    <label for="category" class="form-label">Category :</label>
+                    <select name="category_id" id="category_id">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}" {{ $product->category_id == $category->id ? 'selected' :  "" }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="card-footer">
                     <button class="btn btn-primary" type="submit">Update</button>
                     <a href="{{ route('products.index') }}" class="btn btn-secondary">Back</a>

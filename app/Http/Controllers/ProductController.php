@@ -40,12 +40,14 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $categories = Category::get();
+
         $product = Product::find($id);
 
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
-    public function update(ProductUpdateRequest $request)
+    public function update(Request $request)
     {
         $product = Product::find($request->id);
 
@@ -53,6 +55,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
+            'category_id' => $request->category_id,
         ]);
 
         return redirect()->route('products.index');

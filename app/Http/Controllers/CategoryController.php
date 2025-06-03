@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryUpateRequest;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
 {
+
+    protected $categoryRepository;
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categoryRepository->index();
 
         return view('categories.index', compact('categories'));
     }
@@ -22,7 +29,6 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->validate([
             'name' => 'required|string',
             'image' => 'required',
@@ -31,26 +37,25 @@ class CategoryController extends Controller
         if($request->hasFile('image'))
         {
             $imageName = time() . '.' . $request->image->extension();
-            // dd($imageName);
             $request->image->move(public_path('categoryImages'), $imageName);
 
             $data = array_merge($data, ['image' => $imageName] );
         }
-        Category::create($data);
+        $this->categoryRepository->store($data);
 
         return redirect()->route('categories.index');
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
 
         return view('categories.edit', compact('category'));
     }
 
     public function update(CategoryUpateRequest $request)
     {
-        $category = Category::find($request->id);
+        $category = $this->categoryRepository->edit($request->id);
 
         $category->update([
             'name' => $request->name,
@@ -61,7 +66,7 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
 
         $category->delete();
 
