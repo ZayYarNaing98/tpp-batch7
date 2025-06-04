@@ -9,8 +9,4 @@ interface ProductRepositoryInterface
     public function store($data);
 
     public function edit($id);
-
-    // public function update($id, $data);
-
-    // public function destroy($id);
 }

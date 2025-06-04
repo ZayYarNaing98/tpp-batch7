@@ -8,40 +8,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Static Route
-Route::get('/blogs', function(){
-    return "This is Blog.";
-});
-
-// Dynamic Route
-Route::get('/blogs/{id}', function($id){
-    return "This is Blog Details - $id";
-});
-
-// // Naming Route
-// Route::get('/dashboard', function(){
-//     return "Welcome TPP";
-// })->name('dashboard.tpp');
-
-// Route::get('/tpp', function(){
-//     return redirect()->route('dashboard.tpp');
-// });
-
-// Group Route
-Route::prefix('/dashboard')->group(function(){
-    Route::get('/admin', function(){
-        return "This is Admin Dashboard";
-    });
-
-    Route::get('/user', function(){
-        return "This is User Dashabord";
-    })->name('user');
-
-    Route::get('/tpp', function(){
-        return redirect()->route('user');
-    });
-});
-
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
@@ -62,3 +28,6 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
 
 Route::post('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
