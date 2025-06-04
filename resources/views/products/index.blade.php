@@ -19,6 +19,7 @@
                     <th class="bg-primary text-white">NAME</th>
                     <th class="bg-primary text-white">DESCRIPTION</th>
                     <th class="bg-primary text-white">PRICE</th>
+                    <th class="bg-primary text-white">STATUS</th>
                     <th class="bg-primary text-white">CATEGORY</th>
                     <th class="bg-primary text-white">ACTION</th>
                 </tr>
@@ -30,6 +31,13 @@
                         <th>{{ $data['name'] }}</th>
                         <th>{{ $data['description'] }}</th>
                         <th>{{ $data['price'] }}</th>
+                        <th>
+                            @if ($data->status === 1)
+                                <span class="text-success">Active</span>
+                            @else
+                                <span class="text-danger">Suspend</span>
+                            @endif
+                        </th>
                         <th>{{ $data['category']['name'] }}</th>
                         <th class="d-flex">
                             <a href="{{ route('products.edit', ['id' => $data->id]) }}"

@@ -39,6 +39,12 @@
                         class="form-control mb-2">
                 </div>
                 <div class="card-body">
+                    <div class="form-check from-switch">
+                        <label for="status" class="form-check-label">Active Or Inactive</label>
+                        <input type="checkbox" class="form-check-input" name="status" role="switch" checked/>
+                    </div>
+                </div>
+                <div class="card-body">
                     <label for="category" class="form-label">Category :</label>
                     <select name="category_id" id="category_id">
                         @foreach ($categories as $category)

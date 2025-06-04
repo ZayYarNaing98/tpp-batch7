@@ -41,6 +41,13 @@
                         value="{{ $product->price }}" />
                 </div>
                 <div class="card-body">
+                    <div class="form-check form-switch">
+                        <label class="form-check-label">Active or Inactive</label>
+                        <input class="form-check-input" name="status" type="checkbox" role="switch"
+                            {{ $product->status === 1 ? 'checked' : '' }} />
+                    </div>
+                </div>
+                <div class="card-body">
                     <label for="category" class="form-label">Category :</label>
                     <select name="category_id" id="category_id">
                         @foreach ($categories as $category)
