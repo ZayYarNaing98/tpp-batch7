@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -29,7 +30,7 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
 
 Route::post('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -91,9 +91,15 @@
                             </div>
                         </div>
                         <div class="widget-content-right header-user-info ml-3">
-                            <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                            </button>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
