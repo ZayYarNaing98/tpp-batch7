@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
@@ -31,3 +32,7 @@ Route::post('/products/{id}', [ProductController::class, 'delete'])->name('produ
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/users', UserController::class);
+
+Route::post('/users/{id}/status', [UserController::class, 'status'])->name('users.status');
