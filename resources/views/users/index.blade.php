@@ -12,6 +12,7 @@
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Gender</th>
+                    <th>Role</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -25,6 +26,13 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->address }}</td>
                         <td>{{ $user->gender }}</td>
+                        <td>
+                            @foreach ($user->roles as $role)
+                                <span class="badge badge-info">
+                                    {{ $role->name }}
+                                </span>
+                            @endforeach
+                        </td>
                         <th>
                             <form action="{{route('users.status', ['id' => $user->id])}}" method="POST">
                                 @csrf

@@ -2,7 +2,9 @@
 @section('content')
     <div class="container">
         <h1 class="mt-4">Category List</h1>
-        <a href="{{ route('categories.create') }}" class="btn btn-outline-success mb-4">+Create</a>
+        @can('categoryCreate')
+            <a href="{{ route('categories.create') }}" class="btn btn-outline-success mb-4">+Create</a>
+        @endcan
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -22,12 +24,16 @@
                                 style="width: 50px; height: 50px;" />
                         </td>
                         <td class="d-flex">
-                            <a href="{{ route('categories.edit', ['id' => $category->id]) }}"
-                                class="btn btn-outline-warning me-2">Edit</a>
-                            <form action="{{ route('categories.delete', $category->id) }}" method="POST">
-                                @csrf
-                                <button class="btn btn-outline-danger">Delete</button>
-                            </form>
+                            @can('categoryUpdate')
+                                <a href="{{ route('categories.edit', ['id' => $category->id]) }}"
+                                    class="btn btn-outline-warning me-2">Edit</a>
+                            @endcan
+                            @can('categoryDelete')
+                                <form action="{{ route('categories.delete', $category->id) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

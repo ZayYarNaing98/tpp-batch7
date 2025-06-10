@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+{{-- {{dd($roles)}} --}}
     <div class="container">
         <div class="card mt-4">
             <div class="card-header">
@@ -26,6 +27,14 @@
                 <div class="card-body">
                     <label for="gender" class="form-label">Gender</label>
                     <input type="text" name="gender" placeholder="Enter Your Gender" class="form-control mb-2">
+                </div>
+                <div class="card-body">
+                    <label for="roles">Select Roles</label>
+                    <select name="roles[]" id="" class="form-select select">
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="card-body">
                     <label for="password" class="form-label">Password:</label>

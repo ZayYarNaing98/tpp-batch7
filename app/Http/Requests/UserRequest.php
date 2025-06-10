@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'phone' => 'required|string',
             'address' => 'required',
             'gender' => 'required',
+            'roles' => 'required|exists:roles,id',
         ];
     }
 }
