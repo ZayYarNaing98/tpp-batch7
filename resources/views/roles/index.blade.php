@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('content')
     <div class="container">
-        <h1 class="mt-4">RoleList List</h1>
+        <h1 class="mt-4">RoleList</h1>
+        <a href="{{route('roles.create')}}">+Create</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
