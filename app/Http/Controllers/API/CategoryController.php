@@ -8,15 +8,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\API\BaseController;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class CategoryController extends BaseController
 {
+    protected $categoryRepository;
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::get();
+        $categories = $this->categoryRepository->index();
 
         $data = CategoryResource::collection($categories);
 
@@ -44,7 +50,7 @@ class CategoryController extends BaseController
             $request->image->move(public_path('categoryImages'), $imageName);
         }
 
-        $category = Category::create([
+        $category = $this->categoryRepository->store([
             'name' => $request->name,
             'image' => $imageName,
         ]);
@@ -57,7 +63,7 @@ class CategoryController extends BaseController
      */
     public function show(string $id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
 
         $data = new CategoryResource($category);
 
@@ -77,7 +83,7 @@ class CategoryController extends BaseController
             $this->error("Validation Error", $validation->errors(), 422);
         }
 
-        $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
 
         $category->update($request->all());
 
@@ -89,7 +95,7 @@ class CategoryController extends BaseController
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->edit($id);
 
         $category->delete();
 
